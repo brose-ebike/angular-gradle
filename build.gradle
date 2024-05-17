@@ -2,31 +2,12 @@ plugins {
     id 'java-gradle-plugin'
     id 'groovy'
 	// https://plugins.gradle.org/plugin/com.gradle.plugin-publish
-    id 'com.gradle.plugin-publish' version '0.12.0'
+    id 'com.gradle.plugin-publish' version '1.2.1'
 }
 
 group = 'de.clashsoft'
 version = 'git describe --tags'.execute([], rootDir).text[1..-2] // strip v and \n
 description = 'Integrate Angular frontends into your Gradle build.'
-
-pluginBundle {
-    website = 'https://github.com/Clashsoft/Angular-Gradle'
-    vcsUrl = 'https://github.com/Clashsoft/Angular-Gradle'
-    description = project.description
-    tags = [ 'angular', 'frontend', 'node' ]
-
-    plugins {
-        angularGradle {
-            displayName = 'Angular Gradle'
-        }
-    }
-
-    mavenCoordinates {
-        groupId = project.group
-        artifactId = project.name
-        version = project.version
-    }
-}
 
 repositories {
     mavenLocal()
@@ -39,10 +20,16 @@ dependencies {
 }
 
 gradlePlugin {
+    website = 'https://github.com/Clashsoft/Angular-Gradle'
+    vcsUrl = 'https://github.com/Clashsoft/Angular-Gradle'
+
     plugins {
-        angularGradle {
+        create("angularGradle") {
             id = 'de.clashsoft.angular-gradle'
             implementationClass = 'de.clashsoft.gradle.angular.AngularGradlePlugin'
+            displayName = 'Angular Gradle'
+            description = project.description
+            tags = [ 'angular', 'frontend', 'node' ]
         }
     }
 }
