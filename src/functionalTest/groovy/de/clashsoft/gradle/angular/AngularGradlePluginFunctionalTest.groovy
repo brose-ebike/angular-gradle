@@ -5,6 +5,7 @@ import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import org.junit.Assert
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
@@ -41,6 +42,7 @@ class AngularGradlePluginFunctionalTest {
 	}
 
 	@Test
+	@Ignore("The Angular-Gradle-Demo project is not compatible with Gradle 8.0")
 	void build() {
 		downloadAngularGradleDemo()
 
